@@ -5,8 +5,10 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 const app = express();
-const port = 8080;
-const wss = new WebSocketServer({ port: 8081 });
+// const port = 8080;
+const port = process.env.PORT || 8080;
+const wss = new WebSocketServer({ server:app.listen(port) });
+// const wss = new WebSocketServer({ port: 8081 });
 const clients = new Set();
 
 const arbitrators = [
@@ -59,6 +61,6 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok' });
 });
 
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`Server running on port ${port}`);
+// });
